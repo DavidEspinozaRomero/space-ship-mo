@@ -1,7 +1,8 @@
+import { Socket } from 'socket.io-client';
 export class InputHandler {
   keys: string[] = [];
 
-  constructor() {
+  constructor(private socket: Socket) {
     document.addEventListener('keydown', (e) => {
       this.addKey(e);
     });
@@ -14,10 +15,12 @@ export class InputHandler {
   addKey(e: KeyboardEvent) {
     if (this.keys.includes(e.key)) return;
     this.keys.push(e.key);
+    this.socket.emit('inputs', this.keys);
   }
   removeKey(e: KeyboardEvent) {
     if (!this.keys.includes(e.key)) return;
     const index = this.keys.indexOf(e.key);
     this.keys.splice(index, 1);
+    this.socket.emit('inputs', this.keys);
   }
 }
