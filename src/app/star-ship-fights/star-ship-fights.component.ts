@@ -18,7 +18,8 @@ export class StarShipFightsComponent implements OnInit {
   canvas!: HTMLCanvasElement;
   ctx!: CanvasRenderingContext2D | null;
 
-  manager = new Manager('http://localhost:3000');
+  // manager = new Manager('http://localhost:3000');
+  manager = new Manager('https://space-ship-mo-server.onrender.com');
   socket = this.manager.socket('/');
   // socketgame = this.manager.socket('/game');
   inputHandler = new InputHandler(this.socket);
